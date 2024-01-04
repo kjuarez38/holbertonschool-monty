@@ -5,7 +5,7 @@
  */
 void initialize_arguments()
 {
-	arguments = malloc(sizeof(arg_t));
+	arguments = malloc(sizeof(instruction_t));
 	if (arguments == NULL)
 		malloc_failed();
 
