@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <ctype.h>
 
 /**
  * push - Pushes an element onto the stack.
@@ -9,11 +10,20 @@
  */
 int push(stack_t **arrayStack, char *value)
 {
-	int n = atoi(value);
+	int n;
+	int line_num = 0;
 
-	if (n == 0 && value[0] != '0')
-		return (0);
+	for (int i = 0; value[i] != '\0'; i++)
+	{
+		if (!isdigit(value[i]))
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_num);
+			exit(EXIT_FAILURE);
+		}
+		line_num++;
+	}
 
+	n = atoi(value);
 	stack_t *new_node = malloc(sizeof(stack_t));
 
 	if (!new_node)
