@@ -29,9 +29,15 @@ int line_scanner(FILE **file, char **line)
 		ff = find_function(&arrayStack, command, token);
 		line_num++;
 		if (ff == 0)
+		{
 			dprintf(STDERR_FILENO, "L%i: usage: push integer\n", line_num);
+			exit(EXIT_FAILURE);
+		}
 		if (ff == 2)
+		{
 			dprintf(STDERR_FILENO, "L%i: unknown instruction %s\n", line_num, command);
+			exit(EXIT_FAILURE);
+		}
 		free(*line);
 		*line = NULL;
 	}
