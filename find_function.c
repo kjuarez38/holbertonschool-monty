@@ -13,7 +13,7 @@ int find_function(stack_t **arrayStack, char *command, char *value)
 	if (strcmp(command, "push") == 0)
 		return (push(arrayStack, value));
 	if (strcmp(command, "pall") == 0)
-		return (pall(arrayStack));
-	return (0);
-}
+        return (pall(arrayStack));
+    return (0);
 
+}
