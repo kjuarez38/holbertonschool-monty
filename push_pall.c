@@ -1,17 +1,19 @@
 #include "monty.h"
 
-/*
- * push - Pushes an element onto the stack.
- *
- * @arrayStack: Pointer to the top of the stack.
- * @value: String representing the value to be pushed onto the stack.
- * Return: 1 on success, 0 on failure.
- */
+/**
+* push - Pushes an element onto the stack.
+* @arrayStack: Pointer to the top of the stack.
+* @value: String representing the value to be pushed onto the stack.
+*
+* Return: 1 on success, 0 on failure.
+*/
 int push(stack_t **arrayStack, char *value)
 {
 	int n = atoi(value);
-	if (n == 0 && value[0] != '0') // atoi returns 0 for non-numeric strings
+
+	if (n == 0 && value[0] != '0')
 		dprintf(STDERR_FILENO, "L: usage: push integer\n");
+
 
 	stack_t *new_node = malloc(sizeof(stack_t));
 
@@ -33,12 +35,12 @@ int push(stack_t **arrayStack, char *value)
 	return (1);
 }
 
-/*
- * pall - Prints all the values on the stack, starting from the top.
- *
- * @arrayStack: Pointer to the top of the stack.
- * Return: Always 0.
- */
+/**
+* pall - Prints all the values on the stack, starting from the top.
+*
+* @arrayStack: Pointer to the top of the stack.
+* Return: Always 0.
+*/
 int pall(stack_t **arrayStack)
 {
 	stack_t *current;
@@ -55,3 +57,4 @@ int pall(stack_t **arrayStack)
 	}
 	return (0);
 }
+

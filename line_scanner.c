@@ -1,33 +1,33 @@
 #include "monty.h"
 
-/*
- * main - Entry point of the Monty interpreter program.
- *
- * @argc: Number of command-line arguments.
- * @argv: Array of command-line argument strings.
- * Return: 0 on successful execution, EXIT_FAILURE on failure.
- */
-int main(int argc, char *argv[])
+/**
+* line_scanner - Scan each line of file and execute find_function for command.
+*
+* @file: pointer to the file to be scanned.
+* Return: Always 0, indicating the completion of line scanning.
+*/
+int line_scanner(FILE **file)
 {
-	FILE *file;
 	char *line = NULL;
+	char *token = NULL;
+	size_t len = 0;
+	char *command = NULL;
+	stack_t *arrayStack = NULL;
 
-	if (argc != 2)
+	while (getline(&line, &len, *file) > 0)
 	{
-		dprintf(STDERR_FILENO, "USAGE: monty file\n");
-		return (EXIT_FAILURE);
-	}
-	file = fopen(argv[1], "r");
+		command = strtok(line, " \t\n\r");
+		len++;
 
-	if (file == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't open file <file>\n");
-		return (EXIT_FAILURE);
-	}
-	line_scanner(&file, &line);
+		if (!command)
+			continue;
 
-	fclose(file);
-	free(line);
+		token = strtok(NULL, " \t\n\r");
+		while (token && strlen(token) == 0)
+			token = strtok(NULL, " \t\n\r");
+		find_function(&arrayStack, command, token);
+	}
 
 	return (0);
 }
+
