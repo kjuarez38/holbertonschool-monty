@@ -18,7 +18,7 @@ int push(stack_t **arrayStack, char *value)
 
 	for (int i = 0; value[i] != '\0'; i++)
 	{
-		if (!isdigit(value[i]))
+		if (!isdigit(value[i]) && value[i] != '-' && value[i] != '+')
 		{
 			return (0);
 		}
