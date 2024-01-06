@@ -11,7 +11,7 @@ int pint(stack_t **arrayStack)
 {
 	stack_t *current;
 
-	if (arrayStack == NULL)
+	if (*arrayStack == NULL)
 		return (3);
 
 	current = *arrayStack;
