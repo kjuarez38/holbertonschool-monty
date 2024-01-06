@@ -61,17 +61,13 @@ void safequit(stack_t *arrayStack, int code, int line, char *command)
 		free(temp);
 	}
 
-	if (code)
-	{
-		if (code == 0)
-			dprintf(STDERR_FILENO, "L%i: usage: push integer\n", line);
-		if (code == 1)
-			return;
-		if (code == 2)
-			dprintf(STDERR_FILENO, "L%i: unknown instruction %s\n", line, command);
-		free(command);
-		exit(EXIT_FAILURE);
-	}
-
+	if (code == 0)
+		dprintf(STDERR_FILENO, "L%i: usage: push integer\n", line);
+	if (code == 1)
+		return;
+	if (code == 2)
+		dprintf(STDERR_FILENO, "L%i: unknown instruction %s\n", line, command);
+	free(command);
+	exit(EXIT_FAILURE);
 
 }
