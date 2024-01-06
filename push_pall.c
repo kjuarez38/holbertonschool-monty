@@ -17,8 +17,7 @@ int push(stack_t **arrayStack, char *value)
 	{
 		if (!isdigit(value[i]))
 		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_num);
-			exit(EXIT_FAILURE);
+			return (0);
 		}
 		line_num++;
 	}

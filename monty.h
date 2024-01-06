@@ -30,6 +30,7 @@ int push(stack_t **stack, char *value);
 int pall(stack_t **stack);
 int line_scanner(FILE **file, char **line);
 int find_function(stack_t **stack, char *command, char *value);
+void free_stack(stack_t *arrayStack);
 
 #endif
 
