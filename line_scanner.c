@@ -30,12 +30,13 @@ int line_scanner(FILE **file, char **line)
 		while (token && strlen(token) == 0)
 			token = strtok(NULL, " \t\n\r");
 		ff = find_function(&arrayStack, command, token);
-		free(*line);
+		printf("%s", command);
 		if (ff == 0)
 		{
 			dprintf(STDERR_FILENO, "L%i: usage: push integer\n", line_num);
 			free_stack(arrayStack);
 			fclose(*file);
+			free(*line);
 			exit(EXIT_FAILURE);
 		}
 		if (ff == 2)
@@ -43,8 +44,10 @@ int line_scanner(FILE **file, char **line)
 			dprintf(STDERR_FILENO, "L%i: unknown instruction %s\n", line_num, command);
 			free_stack(arrayStack);
 			fclose(*file);
+			free(*line);
 			exit(EXIT_FAILURE);
 		}
+		free(*line);
 		*line = NULL;
 	}
 	free_stack(arrayStack);
