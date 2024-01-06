@@ -13,6 +13,9 @@ int push(stack_t **arrayStack, char *value)
 	int n;
 	int line_num = 0;
 
+	if (!value || strlen(value) == 0)
+		return (0);
+
 	for (int i = 0; value[i] != '\0'; i++)
 	{
 		if (!isdigit(value[i]))

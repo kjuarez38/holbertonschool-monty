@@ -18,10 +18,14 @@ int line_scanner(FILE **file, char **line)
 
 	while (getline(line, &len, *file) > 0)
 	{
+		token = NULL;
 		command = strtok(*line, " \t\n\r");
 		len++;
+
+		line_num++;
 		if (!command || strlen(command) == 0)
 			continue;
+		
 		token = strtok(NULL, " \t\n\r");
 		while (token && strlen(token) == 0)
 			token = strtok(NULL, " \t\n\r");
@@ -41,7 +45,6 @@ int line_scanner(FILE **file, char **line)
 			fclose(*file);
 			exit(EXIT_FAILURE);
 		}
-		line_num++;
 		*line = NULL;
 	}
 	free_stack(arrayStack);
