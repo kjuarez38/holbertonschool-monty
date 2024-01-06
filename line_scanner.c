@@ -26,7 +26,6 @@ int line_scanner(FILE **file, char **line)
 		while (token && strlen(token) == 0)
 			token = strtok(NULL, " \t\n\r");
 		ff = find_function(&arrayStack, command, token);
-		line_num++;
 		free(*line);
 		if (ff == 0)
 		{
@@ -42,6 +41,7 @@ int line_scanner(FILE **file, char **line)
 			fclose(*file);
 			exit(EXIT_FAILURE);
 		}
+		line_num++;
 		*line = NULL;
 	}
 	free_stack(arrayStack);
