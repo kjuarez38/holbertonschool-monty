@@ -16,6 +16,8 @@ int find_function(stack_t **arrayStack, char *command, char *value)
 		return (pall(arrayStack));
 	if (strcmp(command, "pint") == 0)
 		return (pint(arrayStack));
+	if (strcmp(command, "pop") == 0)
+		return (pop(arrayStack));
 	return (2);
 
 }
