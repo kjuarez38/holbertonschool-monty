@@ -30,7 +30,6 @@ int line_scanner(FILE **file, char **line)
 		while (token && strlen(token) == 0)
 			token = strtok(NULL, " \t\n\r");
 		ff = find_function(&arrayStack, command, token);
-		printf("%s", command);
 		if (ff == 0)
 		{
 			dprintf(STDERR_FILENO, "L%i: usage: push integer\n", line_num);
