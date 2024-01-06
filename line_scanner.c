@@ -67,6 +67,8 @@ void safequit(stack_t *arrayStack, int code, int line, char *command)
 		return;
 	if (code == 2)
 		dprintf(STDERR_FILENO, "L%i: unknown instruction %s\n", line, command);
+	if (code == 3)
+		dprintf(STDERR_FILENO, "L%i: can't pint, stack empty\n", line);
 	free(command);
 	exit(EXIT_FAILURE);
 

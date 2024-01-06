@@ -12,7 +12,7 @@ int pint(stack_t **arrayStack)
 	stack_t *current;
 
 	if (arrayStack == NULL)
-		return (0);
+		return (3);
 
 	current = *arrayStack;
 	printf("%i\n", current->n);
