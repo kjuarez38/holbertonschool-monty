@@ -30,7 +30,7 @@ int line_scanner(FILE **file, char **line)
 		while (token && strlen(token) == 0)
 			token = strtok(NULL, " \t\n\r");
 		ff = find_function(&arrayStack, command, token);
-		if (ff != 0)
+		if (ff != 1)
 		{
 			fclose(*file);
 			safequit(arrayStack, ff, line_num, command);
@@ -38,7 +38,6 @@ int line_scanner(FILE **file, char **line)
 		free(*line);
 		*line = NULL;
 	}
-	fclose(*file);
 	safequit(arrayStack, 1, line_num, NULL);
 	return (0);
 }
