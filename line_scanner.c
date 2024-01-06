@@ -32,11 +32,13 @@ int line_scanner(FILE **file, char **line)
 		ff = find_function(&arrayStack, command, token);
 		if (ff != 0)
 		{
+			fclose(*file);
 			safequit(arrayStack, ff, line_num, command);
 		}
 		free(*line);
 		*line = NULL;
 	}
+	fclose(*file);
 	safequit(arrayStack, 1, line_num, NULL);
 	return (0);
 }
@@ -65,9 +67,10 @@ void safequit(stack_t *arrayStack, int code, int line, char *command)
 		if (code == 0)
 			dprintf(STDERR_FILENO, "L%i: usage: push integer\n", line);
 		if (code == 1)
-			exit(EXIT_SUCCESS);
+			return;
 		if (code == 2)
 			dprintf(STDERR_FILENO, "L%i: unknown instruction %s\n", line, command);
+		free(command);
 		exit(EXIT_FAILURE);
 	}
 
