@@ -70,7 +70,7 @@ void safequit(stack_t *arrayStack, int code, int line, char *command)
 	if (code == 3)
 		dprintf(STDERR_FILENO, "L%i: can't pint, stack empty\n", line);
 	if (code == 4)
-		dprinft(STDERR_FILENO, "L%i: can't pop an empty stack\n", line);
+		dprintf(STDERR_FILENO, "L%i: can't pop an empty stack\n", line);
 	free(command);
 	exit(EXIT_FAILURE);
 
