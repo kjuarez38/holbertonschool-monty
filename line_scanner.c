@@ -25,42 +25,51 @@ int line_scanner(FILE **file, char **line)
 		line_num++;
 		if (!command || strlen(command) == 0)
 			continue;
-		
+
 		token = strtok(NULL, " \t\n\r");
 		while (token && strlen(token) == 0)
 			token = strtok(NULL, " \t\n\r");
 		ff = find_function(&arrayStack, command, token);
-		if (ff == 0)
+		if (ff != 0)
 		{
-			dprintf(STDERR_FILENO, "L%i: usage: push integer\n", line_num);
-			free_stack(arrayStack);
-			fclose(*file);
-			free(*line);
-			exit(EXIT_FAILURE);
-		}
-		if (ff == 2)
-		{
-			dprintf(STDERR_FILENO, "L%i: unknown instruction %s\n", line_num, command);
-			free_stack(arrayStack);
-			fclose(*file);
-			free(*line);
-			exit(EXIT_FAILURE);
+			safequit(arrayStack, ff, line_num, command);
 		}
 		free(*line);
 		*line = NULL;
 	}
-	free_stack(arrayStack);
+	safequit(arrayStack, 1, line_num, NULL);
 	return (0);
 }
 
-
-void free_stack(stack_t *arrayStack)
+/**
+ * safequit - Safe quit the program.
+ *
+ * @arrayStack: array of stack
+ * @code: exit code
+ * @line: line command exit
+ * @command: command exit (maybe empty)
+ */
+void safequit(stack_t *arrayStack, int code, int line, char *command)
 {
 	stack_t *temp;
+
 	while (arrayStack != NULL)
 	{
 		temp = arrayStack;
 		arrayStack = arrayStack->next;
 		free(temp);
 	}
+
+	if (code)
+	{
+		if (code == 0)
+			dprintf(STDERR_FILENO, "L%i: usage: push integer\n", line);
+		if (code == 1)
+			exit(EXIT_SUCCESS);
+		if (code == 2)
+			dprintf(STDERR_FILENO, "L%i: unknown instruction %s\n", line, command);
+		exit(EXIT_FAILURE);
+	}
+
+
 }
